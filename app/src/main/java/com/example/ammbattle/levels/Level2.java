@@ -1,5 +1,6 @@
 package com.example.ammbattle.levels;
 
+import com.example.ammbattle.Dvizhok.BitmapLoader;
 import com.example.ammbattle.Dvizhok.CollisionDetectors;
 import com.example.ammbattle.Dvizhok.EasyTimer;
 import com.example.ammbattle.Dvizhok.Loopable;
@@ -15,30 +16,31 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import static com.example.ammbattle.Dvizhok.BitmapLoader.heart;
+import static com.example.ammbattle.Dvizhok.BitmapLoader.inf;
 import static com.example.ammbattle.Dvizhok.BitmapLoader.ogon;
 import static com.example.ammbattle.Dvizhok.BitmapLoader.svet;
 import static com.example.ammbattle.Dvizhok.BitmapLoader.svetBig;
 
-public class Level1 implements Loopable {
+public class Level2 implements Loopable {
     private PmmPlayer pmmPlayer;
-    private ArrayList<Enemy> svetochs;
-    private int lives = 10;
-    private EnemyBoss prosvetovOgon;
+    private ArrayList<Enemy> infs;
+    private int lives = 3;
+    private EnemyBoss uskova;
     private boolean gameOver = false, win = false;
     private MainRunActivity mainRunActivity;
     private EasyTimer easyTimer;
 
-    public Level1(MainRunActivity mainRunActivity) {
+    public Level2(MainRunActivity mainRunActivity) {
         this.mainRunActivity = mainRunActivity;
         pmmPlayer = new PmmPlayer(mainRunActivity);
-        svetochs = new ArrayList<>();
+        infs = new ArrayList<>();
 
-        prosvetovOgon = null;
+        uskova = null;
         Random random = new Random();
         int x = 900;
         int y = (int) (Math.random() * (530 - 60) + 60);
         for (byte i = 0; i < 10; i++) {
-            svetochs.add(new Enemy(svet, x, y, 30, 50, 3));
+            infs.add(new Enemy(inf, x, y, 30, 50, 3));
             y = (int) (Math.random() * 470 + 60);
             x += 500;
         }
@@ -50,12 +52,12 @@ public class Level1 implements Loopable {
     public void run(GamePaint gamePaint) {
         repaint();
         pmmPlayer.run(gamePaint);
-        for (Enemy enemy : svetochs) {
+        for (Enemy enemy : infs) {
             enemy.run(gamePaint);
         }
 
-        if (prosvetovOgon != null)
-            prosvetovOgon.run(gamePaint);
+        if (uskova != null)
+            uskova.run(gamePaint);
 
         int hX = 500;
         for (int i = 0; i < lives; i++) {
@@ -67,39 +69,39 @@ public class Level1 implements Loopable {
     @Override
     public void repaint() {
         for (short i = 0; i < pmmPlayer.getBullets().size(); i++)
-            if (svetochs.size() > 0) {
-                for (byte j = 0; j < svetochs.size(); j++) {
-                    if (CollisionDetectors.checkTwoItemCollision(pmmPlayer.getBullets().get(i), svetochs.get(j))) {
-                        svetochs.get(j).setHealth(svetochs.get(j).getHealth(), pmmPlayer.getPower());
+            if (infs.size() > 0) {
+                for (byte j = 0; j < infs.size(); j++) {
+                    if (CollisionDetectors.checkTwoItemCollision(pmmPlayer.getBullets().get(i), infs.get(j))) {
+                        infs.get(j).setHealth(infs.get(j).getHealth(), pmmPlayer.getPower());
                         pmmPlayer.getBullets().get(i).setX(900);
                     }
-                    if (svetochs.get(j).getHealth() <= 0)
-                        svetochs.remove(j);
-                    if (svetochs.size() > j) {
-                        if (svetochs.get(j).getX() < -70) {
-                            svetochs.remove(j);
+                    if (infs.get(j).getHealth() <= 0)
+                        infs.remove(j);
+                    if (infs.size() > j) {
+                        if (infs.get(j).getX() < -70) {
+                            infs.remove(j);
                             lives--;
                         }
                     }
                 }
-                System.out.println(svetochs.size());
+                System.out.println(infs.size());
 
-                if (svetochs.size() == 0 && prosvetovOgon == null)
-                    prosvetovOgon = new EnemyBoss(svetBig, 600, 300, 300, 100, 2, 10, ogon);
+                if (infs.size() == 0 && uskova == null)
+                    uskova = new EnemyBoss(BitmapLoader.uskova, 600, 300, 300, 100, 2, 10, ogon);
             }
 
-        if (prosvetovOgon != null) {
+        if (uskova != null) {
             for (short i = 0; i < pmmPlayer.getBullets().size(); i++) {
-                if (CollisionDetectors.checkTwoItemCollision(pmmPlayer.getBullets().get(i), prosvetovOgon)) {
-                    prosvetovOgon.setHealth(prosvetovOgon.getHealth(), pmmPlayer.getPower());
+                if (CollisionDetectors.checkTwoItemCollision(pmmPlayer.getBullets().get(i), uskova)) {
+                    uskova.setHealth(uskova.getHealth(), pmmPlayer.getPower());
                     pmmPlayer.getBullets().get(i).setX(900);
                 }
             }
 
-            for (short i = 0; i < prosvetovOgon.getBullets().size(); i++) {
-                if (prosvetovOgon.getBullets().get(i).getX() < 10 && prosvetovOgon.getBullets().get(i).getX() > 0 && Math.abs(prosvetovOgon.getBullets().get(i).getY() - pmmPlayer.getY()) < 10) {
-                    prosvetovOgon.getBullets().get(i).setX(1200);
-                    prosvetovOgon.getBullets().get(i).setY(-1200);
+            for (short i = 0; i < uskova.getBullets().size(); i++) {
+                if (uskova.getBullets().get(i).getX() < 10 && uskova.getBullets().get(i).getX() > 0 && Math.abs(uskova.getBullets().get(i).getY() - pmmPlayer.getY()) < 10) {
+                    uskova.getBullets().get(i).setX(1200);
+                    uskova.getBullets().get(i).setY(-1200);
                     if (easyTimer.timerDelay(1)) lives--;
                     easyTimer.startTimer();
                 }
@@ -107,7 +109,7 @@ public class Level1 implements Loopable {
         }
         if (lives == 0)
             gameOver = true;
-        if (prosvetovOgon != null && prosvetovOgon.isDefeated())
+        if (uskova != null && uskova.isDefeated())
             win = true;
 
         if (gameOver)
@@ -121,5 +123,6 @@ public class Level1 implements Loopable {
     public void repaint(double speed, double jumSpeed) {
 
     }
+
 
 }

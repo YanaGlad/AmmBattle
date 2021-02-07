@@ -9,6 +9,7 @@ import com.example.ammbattle.Dvizhok.MainRunActivity;
 import com.example.ammbattle.R;
 import com.example.ammbattle.gameAttributes.MovingBackground;
 import com.example.ammbattle.levels.Level1;
+import com.example.ammbattle.levels.Level2;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,12 +17,12 @@ import java.util.ArrayList;
 public class MenuView extends GameView {
     private BasicButton btn;
     private MovingBackground movingBackground;
-    private Level1 level1;
+    private Level2 level1;
 
     public MenuView(MainRunActivity mainRunActivity) {
         super(mainRunActivity);
         movingBackground = new MovingBackground(BitmapLoader.movingSpaceBackground, 1);
-        level1 = new Level1(mainRunActivity);
+        level1 = new Level2(mainRunActivity);
     }
 
 

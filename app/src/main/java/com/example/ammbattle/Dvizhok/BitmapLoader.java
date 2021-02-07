@@ -9,7 +9,7 @@ import java.io.IOException;
 public class BitmapLoader {
 
     public static Bitmap pmmPlayer, svet, svetBig, movingSpaceBackground, ogon, heart, gameOver;
-    public static Bitmap baseButtonClicked, baseButton, win;
+    public static Bitmap baseButtonClicked, baseButton, win, uskova, inf;
 
     public static Bitmap bullet;
 
@@ -46,6 +46,8 @@ public class BitmapLoader {
         baseButton = gamePaint.createNewGraphicsBitmap("baseButton.png");
         baseButtonClicked = gamePaint.createNewGraphicsBitmap("baseButtonClicked.png");
         win =  gamePaint.createNewGraphicsBitmap("win.png");
+        uskova =  gamePaint.createNewGraphicsBitmap("uzkova.png");
+        inf =  gamePaint.createNewGraphicsBitmap("inf.png");
 
 
     }
