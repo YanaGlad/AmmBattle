@@ -1,5 +1,6 @@
 package com.example.ammbattle.levels;
 
+import com.example.ammbattle.Dvizhok.BitmapLoader;
 import com.example.ammbattle.Dvizhok.CollisionDetectors;
 import com.example.ammbattle.Dvizhok.EasyTimer;
 import com.example.ammbattle.Dvizhok.Loopable;
@@ -19,7 +20,7 @@ import static com.example.ammbattle.Dvizhok.BitmapLoader.ogon;
 import static com.example.ammbattle.Dvizhok.BitmapLoader.svet;
 import static com.example.ammbattle.Dvizhok.BitmapLoader.svetBig;
 
-public class Level1 implements Loopable {
+public class Level1 extends Level implements Loopable {
     private PmmPlayer pmmPlayer;
     private ArrayList<Enemy> svetochs;
     private int lives = 10;
@@ -111,10 +112,10 @@ public class Level1 implements Loopable {
             win = true;
 
         if (gameOver)
-            mainRunActivity.setView(new LoseView(mainRunActivity));
+            mainRunActivity.setView(new LoseView(mainRunActivity, new Level1(mainRunActivity)));
 
         if (win)
-            mainRunActivity.setView(new WinView(mainRunActivity));
+            mainRunActivity.setView(new WinView(mainRunActivity, "Prosvetov DEFEATED", BitmapLoader.win, new Level2(mainRunActivity)));
     }
 
     @Override

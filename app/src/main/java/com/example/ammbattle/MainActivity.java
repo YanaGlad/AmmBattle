@@ -1,14 +1,10 @@
 package com.example.ammbattle;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
-import android.os.Bundle;
 
 import com.example.ammbattle.Dvizhok.BitmapLoader;
 import com.example.ammbattle.Dvizhok.GameView;
 import com.example.ammbattle.Dvizhok.MainRunActivity;
-import com.example.ammbattle.views.MenuView;
 import com.example.ammbattle.views.StartView;
 
 import java.io.IOException;

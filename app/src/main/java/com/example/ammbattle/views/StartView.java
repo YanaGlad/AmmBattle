@@ -5,6 +5,7 @@ import com.example.ammbattle.Dvizhok.BasicButton;
 import com.example.ammbattle.Dvizhok.BitmapLoader;
 import com.example.ammbattle.Dvizhok.GameView;
 import com.example.ammbattle.Dvizhok.MainRunActivity;
+import com.example.ammbattle.levels.Level1;
 
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public class StartView extends GameView {
     @Override
     public void repaint() {
         if (basicButton.isClicked()){
-            getMainRunActivity().setView(new MenuView(getMainRunActivity()));
+            getMainRunActivity().setView(new LevelView(getMainRunActivity(), new Level1(getMainRunActivity())));
             try {
                 BitmapLoader.marioMusic.run();
             } catch (IOException e) {

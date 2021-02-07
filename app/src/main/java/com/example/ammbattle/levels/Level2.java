@@ -21,7 +21,7 @@ import static com.example.ammbattle.Dvizhok.BitmapLoader.ogon;
 import static com.example.ammbattle.Dvizhok.BitmapLoader.svet;
 import static com.example.ammbattle.Dvizhok.BitmapLoader.svetBig;
 
-public class Level2 implements Loopable {
+public class Level2 extends Level implements Loopable {
     private PmmPlayer pmmPlayer;
     private ArrayList<Enemy> infs;
     private int lives = 3;
@@ -113,10 +113,10 @@ public class Level2 implements Loopable {
             win = true;
 
         if (gameOver)
-            mainRunActivity.setView(new LoseView(mainRunActivity));
+            mainRunActivity.setView(new LoseView(mainRunActivity, new Level2(mainRunActivity)));
 
         if (win)
-            mainRunActivity.setView(new WinView(mainRunActivity));
+            mainRunActivity.setView(new WinView(mainRunActivity, "Uskova DEFEATED", BitmapLoader.win, null));
     }
 
     @Override
